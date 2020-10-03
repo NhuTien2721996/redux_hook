@@ -2,9 +2,9 @@ import React from 'react';
 
 function NotFound() {
     return (
-        <React.Fragment>
-            <h1>Không tìm thấy trang</h1>
-        </React.Fragment>
+        <div>
+            <h1>Không tìm thấy liên kết trang</h1>
+        </div>
     )
 }
 

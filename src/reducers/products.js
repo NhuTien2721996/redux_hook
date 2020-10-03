@@ -1,18 +1,17 @@
-import * as types from './../constants/actionTypes'
+import * as types from './../constants/ActionTypes';
 
-function findIndex(id, products) {
+let initialState = [];
+const findIndex = (products, id) => {
     let result = -1;
     products.forEach((product, index) => {
         if (product.id === id) {
             result = index
         }
     });
-    return result
-}
-
-const initialState = [];
-let products = (state = initialState, action) => {
-    let index=-1;
+    return result;
+};
+const products = (state = initialState, action) => {
+    let index = -1;
     switch (action.type) {
         case types.GET_ALL:
             state = action.products;
@@ -21,15 +20,15 @@ let products = (state = initialState, action) => {
             state.push(action.product);
             return [...state];
         case types.DELETE_PRODUCT:
-             index = findIndex(action.id, state);
+            index = findIndex(state, action.id);
             state.splice(index, 1);
             return [...state];
         case types.UPDATE_PRODUCT:
-             index=findIndex(action.product.id,state);
-                state[index]=action.product;
-                return [...state];
-        default:
-            return state
+            index = findIndex(state, action.product.id);
+            state[index] = action.product;
+            return [...state];
+        default :
+            return state;
     }
 };
 

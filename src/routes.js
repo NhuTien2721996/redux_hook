@@ -1,28 +1,28 @@
 import React from "react";
 import Home from "./pages/Home/Home";
-import NotFound from "./pages/NotFound/NotFound";
 import ProductListPage from "./pages/ProductListPage/ProductListPage";
 import ProductActionPage from "./pages/ProductActionPage/ProductActionPage";
+import NotFound from "./pages/NotFound/NotFound";
 
 const routes = [
     {
-        path: '/',
+        path: "/",
         exact: true,
         main: () => <Home/>
     }, {
-        path: '/product-list',
+        path: "/product-list",
         exact: false,
         main: () => <ProductListPage/>
     }, {
-        path: '/product/add',
+        path: "/product/add",
         exact: false,
         main: () => <ProductActionPage/>
     }, {
-        path: '/product/:id/edit',
+        path: "/product/:id/edit",
         exact: false,
-        main:() => <ProductActionPage/>
+        main: () => <ProductActionPage/>
     }, {
-        path: '',
+        path: "",
         exact: false,
         main: () => <NotFound/>
     }
