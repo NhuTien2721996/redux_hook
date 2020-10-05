@@ -4,6 +4,10 @@ import {addProductRequest, editProductRequest, updateProductRequest, clearForm} 
 import {useHistory, useRouteMatch, useParams, Link} from 'react-router-dom';
 import {useForm} from "react-hook-form";
 import Select from "react-select";
+import DatePicker, {registerLocale} from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
+import vi from "date-fns/locale/vi";
+registerLocale("vi", vi);
 
 const branchList = [
     {value: "hà nội", label: "Hà Nội"},
@@ -18,7 +22,7 @@ function ProductActionPage() {
     const [price, setPrice] = useState('');
     const [branch, setBranch] = useState('Hà Nội');
     const [status, setStatus] = useState(false);
-    const [date, setDate] = useState('');
+    const [startDate, setStartDate] = useState(new Date());
     const productEditing = useSelector((state) => state.ProductEditing);
     const dispatch = useDispatch();
     const history = useHistory();
@@ -33,13 +37,14 @@ function ProductActionPage() {
             price,
             branch,
             status,
-            date
+            startDate
         };
         if (!product.id) {
             dispatch(addProductRequest(product))
         } else {
             dispatch(updateProductRequest(product))
         }
+        console.log(product.startDate);
         history.goBack();
         clearProduct();
     };
@@ -55,7 +60,7 @@ function ProductActionPage() {
             setPrice(productEditing.price);
             setBranch(productEditing.branch);
             setStatus(productEditing.status);
-            setDate(productEditing.date);
+            setStartDate(productEditing.startDate);
         }
     }, [productEditing]);
     const clearProduct = (product) => {
@@ -88,8 +93,6 @@ function ProductActionPage() {
                     <p style={{color: "red"}}>
                         {errors.price && "Vui lòng nhập giá sản phẩm"}
                     </p>
-
-
                 </div>
                 <div className="form-group">
                     <label>Chi nhánh</label>
@@ -113,15 +116,13 @@ function ProductActionPage() {
                 </div>
                 <div className="form-group">
                     <label className="mr-10">Ngày đăng</label>
-                    <input type="date"
-                           name='date'
-                           onChange={(e) => setDate(e.target.value)}
-                           value={date}
-                           ref={register({required: true})}
+                    <DatePicker
+                        name="startDate"
+                        dateFormat="yyyy/MM/dd"
+                        selected={startDate}
+                        onChange={(date)=>setStartDate(date)}
+                        locale="vi"
                     />
-                    <p style={{color: "red"}}>
-                        {errors.date && "Vui lòng nhập ngày"}
-                    </p>
 
                 </div>
                 <button type="submit" className="btn btn-primary mr-10">Lưu</button>

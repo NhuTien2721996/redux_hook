@@ -6,7 +6,7 @@ let initialState = {
     price: '',
     branch:'Hà Nội',
     status: false,
-    date:""
+    startDate:""
 };
 const ProductEditing = (state = initialState, action) => {
     switch (action.type) {
@@ -20,7 +20,7 @@ const ProductEditing = (state = initialState, action) => {
                 price: "",
                 branch:"Hà Nội",
                 status: false,
-                date:""
+                startDate:""
             };
             return state;
 
