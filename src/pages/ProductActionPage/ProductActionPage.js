@@ -3,6 +3,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {addProductRequest, editProductRequest, updateProductRequest, clearForm} from "../../actions";
 import {useHistory, useRouteMatch, useParams, Link} from 'react-router-dom';
 import {useForm} from "react-hook-form";
+import Select from "react-select";
+
+const branchList = [
+    {value: "hà nội", label: "Hà Nội"},
+    {value: "sài gòn", label: "Sài Gòn"},
+    {value: "đà nẵng", label: "Đà Nẵng"},
+];
 
 
 function ProductActionPage() {
@@ -17,7 +24,8 @@ function ProductActionPage() {
     const history = useHistory();
     const match = useRouteMatch("/product/:id/edit");
     const params = useParams();
-    const { register, errors, handleSubmit } = useForm();
+    const {register, errors, handleSubmit} = useForm();
+
     const onHandleSubmit = () => {
         let product = {
             id,
@@ -47,12 +55,13 @@ function ProductActionPage() {
             setPrice(productEditing.price);
             setBranch(productEditing.branch);
             setStatus(productEditing.status);
-            setDate(productEditing.date)
+            setDate(productEditing.date);
         }
     }, [productEditing]);
     const clearProduct = (product) => {
         dispatch(clearForm(product))
     };
+
     return (
         <div className="col-6">
             <form onSubmit={handleSubmit(onHandleSubmit)}>
@@ -62,9 +71,9 @@ function ProductActionPage() {
                            name='name'
                            onChange={(e) => setName(e.target.value)}
                            value={name}
-                           ref={register({ required: true })}
+                           ref={register({required: true})}
                     />
-                    <p style={{color:"red"}}>
+                    <p style={{color: "red"}}>
                         {errors.name && "Vui lòng nhập tên sản phẩm"}
                     </p>
                 </div>
@@ -74,9 +83,9 @@ function ProductActionPage() {
                            name='price'
                            onChange={(e) => setPrice(e.target.value)}
                            value={price}
-                           ref={register({ required: true })}
+                           ref={register({required: true})}
                     />
-                    <p style={{color:"red"}}>
+                    <p style={{color: "red"}}>
                         {errors.price && "Vui lòng nhập giá sản phẩm"}
                     </p>
 
@@ -84,17 +93,15 @@ function ProductActionPage() {
                 </div>
                 <div className="form-group">
                     <label>Chi nhánh</label>
-                    <select className='form-control'
-                            name="branch"
-                            onChange={(e) => setBranch(e.target.value)}
-                            value={branch}
-
-                    >
-                        <option value="Hà Nội">Hà Nội</option>
-                        <option value="Sài Gòn">Sài Gòn</option>
-                    </select>
-
+                    <Select
+                        name="branch"
+                        options={branchList}
+                        onChange={(branchList) => setBranch(branchList.value)}
+                        value={branchList.filter(item => item.value.toLowerCase() === branch.toLowerCase())}
+                        defaultValue={branchList[0].value}
+                    />
                 </div>
+
                 <div className="form-group">
                     <label className="mr-10">Còn hàng</label>
                     <input type="checkbox"
@@ -110,9 +117,9 @@ function ProductActionPage() {
                            name='date'
                            onChange={(e) => setDate(e.target.value)}
                            value={date}
-                           ref={register({ required: true })}
+                           ref={register({required: true})}
                     />
-                    <p style={{color:"red"}}>
+                    <p style={{color: "red"}}>
                         {errors.date && "Vui lòng nhập ngày"}
                     </p>
 
