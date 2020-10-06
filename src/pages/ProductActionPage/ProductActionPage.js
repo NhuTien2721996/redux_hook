@@ -7,6 +7,7 @@ import Select from "react-select";
 import DatePicker, {registerLocale} from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import vi from "date-fns/locale/vi";
+
 registerLocale("vi", vi);
 
 const branchList = [
@@ -22,14 +23,13 @@ function ProductActionPage() {
     const [price, setPrice] = useState('');
     const [branch, setBranch] = useState('Hà Nội');
     const [status, setStatus] = useState(false);
-    const [startDate, setStartDate] = useState(new Date());
+    const [startDate, setStartDate] = useState('');
     const productEditing = useSelector((state) => state.ProductEditing);
     const dispatch = useDispatch();
     const history = useHistory();
     const match = useRouteMatch("/product/:id/edit");
     const params = useParams();
     const {register, errors, handleSubmit} = useForm();
-
     const onHandleSubmit = () => {
         let product = {
             id,
@@ -44,7 +44,6 @@ function ProductActionPage() {
         } else {
             dispatch(updateProductRequest(product))
         }
-        console.log(product.startDate);
         history.goBack();
         clearProduct();
     };
@@ -118,10 +117,12 @@ function ProductActionPage() {
                     <label className="mr-10">Ngày đăng</label>
                     <DatePicker
                         name="startDate"
-                        dateFormat="yyyy/MM/dd"
-                        selected={startDate}
-                        onChange={(date)=>setStartDate(date)}
+                        selected={new Date()}
+                        onChange={(date) => {
+                            setStartDate(date.toLocaleString().split(",")[0]);
+                        }}
                         locale="vi"
+                        value={startDate}
                     />
 
                 </div>

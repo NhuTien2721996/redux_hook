@@ -16,7 +16,7 @@ function ProductItem({product, index, onDelete}) {
             <td>{product.price}</td>
             <td>{product.branch}</td>
             <td>{product.status ? "Còn hàng" : "Hết hàng"}</td>
-            <td>{product.date}</td>
+            <td>{product.startDate}</td>
             <td>
                 <button className="btn btn-danger mr-10" onClick={() => deleteProduct(product.id)}>Xóa</button>
                 <Link to={`/product/${product.id}/edit`} className="btn btn-warning">Cập nhật</Link>

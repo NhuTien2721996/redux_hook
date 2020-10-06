@@ -19,7 +19,8 @@
     "react-sortable-hoc": "^1.11.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "yup": "^0.29.3"
+    "yup": "^0.29.3",
+    "date-fns": "latest"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -6,7 +6,7 @@ let initialState = {
     price: '',
     branch:'Hà Nội',
     status: false,
-    startDate:""
+    startDate:''
 };
 const ProductEditing = (state = initialState, action) => {
     switch (action.type) {
