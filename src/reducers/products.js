@@ -27,6 +27,10 @@ const products = (state = initialState, action) => {
             index = findIndex(state, action.product.id);
             state[index] = action.product;
             return [...state];
+        case types.FILTER_PRODUCT_SUCCESS:
+            const {data}=action.payload;
+            state=data;
+           return state;
         default :
             return state;
     }

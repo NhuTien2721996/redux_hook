@@ -1,7 +1,7 @@
 import * as types from './../constants/ActionTypes';
 import callApi from "../utils/ApiCaller";
 
-export const getAllRequest= () => {
+export const getAllRequest = () => {
     return (dispatch) => {
         return callApi('/products', 'GET', null).then(res => {
             dispatch(getAll(res.data))
@@ -16,8 +16,8 @@ export const getAll = (products) => {
 };
 
 export const addProductRequest = (product) => {
-    return (dispatch)=>{
-        return callApi('/products','POST',product).then(res=>{
+    return (dispatch) => {
+        return callApi('/products', 'POST', product).then(res => {
             dispatch(addProduct(res.data))
         })
     }
@@ -31,11 +31,11 @@ export const addProduct = (product) => {
 };
 
 export const deleteProductRequest = (id) => {
-   return (dispatch)=>{
-       return callApi(`/products/${id}`,'DELETE',null).then(res=>{
-           dispatch(deleteProduct(res.data.id))
-       })
-   }
+    return (dispatch) => {
+        return callApi(`/products/${id}`, 'DELETE', null).then(res => {
+            dispatch(deleteProduct(res.data.id))
+        })
+    }
 };
 
 export const deleteProduct = (id) => {
@@ -46,8 +46,8 @@ export const deleteProduct = (id) => {
 };
 
 export const editProductRequest = (id) => {
-    return (dispatch)=>{
-        return callApi(`/products/${id}`,'GET',null).then(res=>{
+    return (dispatch) => {
+        return callApi(`/products/${id}`, 'GET', null).then(res => {
             dispatch(editProduct(res.data))
         })
     }
@@ -61,8 +61,8 @@ export const editProduct = (product) => {
 };
 
 export const updateProductRequest = (product) => {
-    return (dispatch)=>{
-        return callApi(`/products/${product.id}`,'PUT',product).then(res=>{
+    return (dispatch) => {
+        return callApi(`/products/${product.id}`, 'PUT', product).then(res => {
             dispatch(updateProduct(res.data))
         })
     }
@@ -79,6 +79,24 @@ export const clearForm = (product) => {
     return {
         type: types.CLEAR_PRODUCT,
         product
+    }
+};
+
+export const filterProduct = (keyword) => {
+    return {
+        type: types.FILTER_PRODUCT,
+        payload: {
+            keyword,
+        }
+    }
+};
+
+export const filterProductSuccess = (data) => {
+    return {
+        type: types.FILTER_PRODUCT_SUCCESS,
+        payload: {
+            data,
+        }
     }
 };
 
