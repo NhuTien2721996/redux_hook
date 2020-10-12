@@ -1,12 +1,14 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import {showToast} from "../../helpers/toastHelper";
+import {toast} from "react-toastify";
 
 function ProductItem({product, index, onDelete}) {
     const deleteProduct = (id) => {
         // eslint-disable-next-line no-restricted-globals
         if (confirm('Bạn có chắc chắn muốn xóa không?')) {
-            onDelete(id)
-
+            onDelete(id);
+            toast.success("Xóa thành công");
         }
     };
     return (

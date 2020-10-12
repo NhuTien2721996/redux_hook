@@ -4,6 +4,8 @@ import Menu from "./components/Menu/Menu";
 import routes from "./routes";
 import {Route, Switch, BrowserRouter as Router} from 'react-router-dom';
 
+import GlobalLoading from "./components/GlobalLoading";
+
 function App() {
     const showContentMenu = (routes) => {
         let result = null;
@@ -28,6 +30,7 @@ function App() {
                 <div className="row">
                     {showContentMenu(routes)}
                 </div>
+                <GlobalLoading/>
             </div>
         </Router>
     )

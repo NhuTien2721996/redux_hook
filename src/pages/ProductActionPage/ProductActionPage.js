@@ -7,6 +7,7 @@ import Select from "react-select";
 import DatePicker, {registerLocale} from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import vi from "date-fns/locale/vi";
+import {showToast} from "../../helpers/toastHelper";
 
 registerLocale("vi", vi);
 
@@ -40,9 +41,12 @@ function ProductActionPage() {
             startDate
         };
         if (!product.id) {
-            dispatch(addProductRequest(product))
+            dispatch(addProductRequest(product));
+            showToast("Thêm mới thành công");
+
         } else {
-            dispatch(updateProductRequest(product))
+            dispatch(updateProductRequest(product));
+            showToast("Cập nhật thành công");
         }
         history.goBack();
         clearProduct();
