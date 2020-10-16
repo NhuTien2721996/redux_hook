@@ -28,9 +28,8 @@ const products = (state = initialState, action) => {
             state[index] = action.product;
             return [...state];
         case types.FILTER_PRODUCT_SUCCESS:
-            const {data}=action.payload;
-            state=data;
-           return state;
+            state = action.data;
+            return state;
         default :
             return state;
     }

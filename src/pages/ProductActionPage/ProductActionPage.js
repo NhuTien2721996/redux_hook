@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {addProductRequest, editProductRequest, updateProductRequest, clearForm} from "../../actions";
+import {addProduct, editProduct, updateProduct, clearForm} from "../../actions";
 import {useHistory, useRouteMatch, useParams, Link} from 'react-router-dom';
 import {useForm} from "react-hook-form";
 import Select from "react-select";
@@ -12,9 +12,9 @@ import {showToast} from "../../helpers/toastHelper";
 registerLocale("vi", vi);
 
 const branchList = [
-    {value: "hà nội", label: "Hà Nội"},
-    {value: "sài gòn", label: "Sài Gòn"},
-    {value: "đà nẵng", label: "Đà Nẵng"},
+    {value: "Hà Nội", label: "Hà Nội"},
+    {value: "Sài Gòn", label: "Sài Gòn"},
+    {value: "Đà Nẵng", label: "Đà Nẵng"},
 ];
 
 
@@ -41,11 +41,11 @@ function ProductActionPage() {
             startDate
         };
         if (!product.id) {
-            dispatch(addProductRequest(product));
+            dispatch(addProduct(product));
             showToast("Thêm mới thành công");
 
         } else {
-            dispatch(updateProductRequest(product));
+            dispatch(updateProduct(product));
             showToast("Cập nhật thành công");
         }
         history.goBack();
@@ -53,7 +53,7 @@ function ProductActionPage() {
     };
     useEffect(() => {
         if (match) {
-            dispatch(editProductRequest(params.id))
+            dispatch(editProduct(params.id));
         }
     }, []);
     useEffect(() => {
@@ -103,7 +103,7 @@ function ProductActionPage() {
                         name="branch"
                         options={branchList}
                         onChange={(branchList) => setBranch(branchList.value)}
-                        value={branchList.filter(item => item.value.toLowerCase() === branch.toLowerCase())}
+                        value={branchList.filter(item => item.value=== branch)}
                         defaultValue={branchList[0].value}
                     />
                 </div>

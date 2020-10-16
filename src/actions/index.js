@@ -1,25 +1,9 @@
 import * as types from './../constants/ActionTypes';
-import callApi from "../utils/ApiCaller";
 
-export const getAllRequest = () => {
-    return (dispatch) => {
-        return callApi('/products', 'GET', null).then(res => {
-            dispatch(getAll(res.data))
-        })
-    }
-};
 export const getAll = (products) => {
     return {
         type: types.GET_ALL,
         products
-    }
-};
-
-export const addProductRequest = (product) => {
-    return (dispatch) => {
-        return callApi('/products', 'POST', product).then(res => {
-            dispatch(addProduct(res.data))
-        })
     }
 };
 
@@ -30,14 +14,6 @@ export const addProduct = (product) => {
     }
 };
 
-export const deleteProductRequest = (id) => {
-    return (dispatch) => {
-        return callApi(`/products/${id}`, 'DELETE', null).then(res => {
-            dispatch(deleteProduct(res.data.id))
-        })
-    }
-};
-
 export const deleteProduct = (id) => {
     return {
         type: types.DELETE_PRODUCT,
@@ -45,13 +21,6 @@ export const deleteProduct = (id) => {
     }
 };
 
-export const editProductRequest = (id) => {
-    return (dispatch) => {
-        return callApi(`/products/${id}`, 'GET', null).then(res => {
-            dispatch(editProduct(res.data))
-        })
-    }
-};
 
 export const editProduct = (product) => {
     return {
@@ -60,13 +29,6 @@ export const editProduct = (product) => {
     }
 };
 
-export const updateProductRequest = (product) => {
-    return (dispatch) => {
-        return callApi(`/products/${product.id}`, 'PUT', product).then(res => {
-            dispatch(updateProduct(res.data))
-        })
-    }
-};
 
 export const updateProduct = (product) => {
     return {
@@ -85,18 +47,14 @@ export const clearForm = (product) => {
 export const filterProduct = (keyword) => {
     return {
         type: types.FILTER_PRODUCT,
-        payload: {
-            keyword,
-        }
+        keyword
     }
 };
 
 export const filterProductSuccess = (data) => {
     return {
         type: types.FILTER_PRODUCT_SUCCESS,
-        payload: {
-            data,
-        }
+        data
     }
 };
 

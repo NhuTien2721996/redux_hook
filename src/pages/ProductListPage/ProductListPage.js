@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import ProductList from "../../components/ProductList/ProductList";
 import {useDispatch, useSelector} from "react-redux";
-import {getAllRequest, deleteProductRequest} from "../../actions";
+import {getAll, deleteProduct} from "../../actions";
 import ProductItem from "../../components/ProductItem/ProductItem";
 import {Link} from 'react-router-dom';
 import {filterProduct} from "../../actions/index";
@@ -10,10 +10,10 @@ function ProductListPage() {
     const products = useSelector((state) => state.products);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getAllRequest())
+        dispatch(getAll(products));
     }, []);
     const onDelete = (id) => {
-        dispatch(deleteProductRequest(id))
+        dispatch(deleteProduct(id));
     };
     const onHandleChange = (keyword) => {
         dispatch(filterProduct(keyword));

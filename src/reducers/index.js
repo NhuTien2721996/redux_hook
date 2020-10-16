@@ -5,7 +5,7 @@ import uiReducer from "./ui";
 const appReducer=combineReducers({
    products,
    ProductEditing,
-   uiReducer
+   uiReducer,
 });
 
 export default appReducer;
